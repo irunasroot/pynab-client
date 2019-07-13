@@ -1,0 +1,81 @@
+"""
+budgetmonth.py - datamodels for Budget Months
+Comments: 
+Author: Dennis Whitney
+Email: dennis@runasroot.com
+Copyright © 2019, iRunAsRoot 
+"""
+
+from . import JsonDict, JsonList
+
+
+class BudgetCategoriesGroup(JsonDict):
+    fields = {
+        "id": str(),
+        "name": str(),
+        "hidden": bool(),
+        "deleted": bool()
+    }
+
+    def __init__(self):
+        super().__init__()
+
+
+class BudgetCategory(JsonDict):
+
+    fields = {
+            "id": str(),
+            "category_group_id": str(),
+            "name": str(),
+            "hidden": bool(),
+            "original_category_group_id": str(),
+            "note": str(),
+            "budgeted": int(),
+            "activity": int(),
+            "balance": int(),
+            "goal_type": str(),
+            "goal_creation_month": str(),
+            "goal_target": int(),
+            "goal_target_month": str(),
+            "goal_percentage_complete": int(),
+            "deleted": bool()
+    }
+
+    def __init__(self):
+        super().__init__()
+
+    def set_category(self):
+        pass
+
+
+class BudgetCategories(JsonList):
+
+    def __init__(self):
+        super().__init__()
+
+    def __str__(self):
+        d = ", ".join([i.name for i in self._data])
+
+        return f"<{self.__class__.__name__} [{len(self._data)}]: {d}>"
+
+    def from_json_list(self, cls, initlist):
+        """
+         Class method for creating the proper incoming Ynab object. The incoming data needs to be a list type object.
+         This method would also be provided a single type object for generating a list of these singular items.
+
+        :param cls: The single item Ynab object type to to return as a list.
+        :param initlist: The list of json objects to create objects from.
+        :return: Returning a list of singular Ynab data type objects.
+        """
+
+        for group in initlist:
+            for cat in group["categories"]:
+                obj = cls()
+                obj.from_json_dict(cat)
+
+                sub_obj = BudgetCategoriesGroup()
+                sub_obj.from_json_dict(group)
+                setattr(obj, "group", sub_obj)
+
+                self.append(obj)
+        return self
