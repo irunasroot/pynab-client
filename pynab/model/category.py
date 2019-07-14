@@ -69,13 +69,13 @@ class BudgetCategories(JsonList):
         """
 
         for group in initlist:
+
             for cat in group["categories"]:
                 obj = cls()
                 obj.from_json_dict(cat)
 
-                sub_obj = BudgetCategoriesGroup()
-                sub_obj.from_json_dict(group)
-                setattr(obj, "group", sub_obj)
+                if "id" in group:
+                    setattr(obj, "group", BudgetCategoriesGroup().from_json_dict(group))
 
                 self.append(obj)
         return self

@@ -19,7 +19,9 @@ class JsonDict(object):
 
     def __str__(self):
         d = ", ".join([f"{k} : {v}" for k, v in self.items()])
-        return f"<{self.__class__.__name__} [{len(self._keys)}]: {d}"
+        return f"<{self.__class__.__name__} [{len(self._keys)}]: {d}>"
+
+    __repr__ = __str__
 
     def __getattr__(self, item):
         return self.__getattribute__(item)
@@ -50,6 +52,8 @@ class JsonDict(object):
         for k, v in list(self.fields.items()):
             setattr(self, k, json_data[k])
 
+        return self
+
     def items(self):
         return iter([(k, getattr(self, k)) for k in self._keys if not k.startswith("_")])
 
@@ -71,6 +75,8 @@ class JsonList(object):
     def __str__(self):
         return f"<{self.__class__.__name__} [{len(self._data)}]>"
 
+    __repr__ = __str__
+
     def __len__(self):
         return len(self._data)
 
@@ -84,9 +90,10 @@ class JsonList(object):
         :return: Returning a list of singular Ynab data type objects.
         """
 
-        obj = cls()
         for item in initlist:
-            self._data.append(obj.from_json_dict(item))
+            obj = cls()
+            obj.from_json_dict(item)
+            self._data.append(obj)
         return self
 
     def append(self, item):
