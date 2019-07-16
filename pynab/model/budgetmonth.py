@@ -1,9 +1,9 @@
 """
-budgetmonth.py - datamodels for Budget Months
-Comments: 
+budgetmonth.py
+Comments: Data objects for Budget Month information
 Author: Dennis Whitney
 Email: dennis@runasroot.com
-Copyright © 2019, iRunAsRoot 
+Copyright (c) 2019, iRunAsRoot
 """
 
 from . import JsonDict, JsonList

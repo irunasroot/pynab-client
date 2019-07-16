@@ -1,9 +1,9 @@
 """
-__init__.py - desc
-Comments: 
+__init__.py
+Comments: Base classes for all other models
 Author: Dennis Whitney
 Email: dennis@runasroot.com
-Copyright © 2019, iRunAsRoot 
+Copyright (c) 2019, iRunAsRoot
 """
 
 
@@ -28,7 +28,8 @@ class JsonDict(object):
 
     def __setattr__(self, key, value):
         super().__setattr__(key, value)
-        self._keys.append(key)
+        if key not in self._keys:
+            self._keys.append(key)
 
     def __delattr__(self, item):
         if item in self:

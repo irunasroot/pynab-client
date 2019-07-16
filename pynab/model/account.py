@@ -1,9 +1,9 @@
 """
-account.py - desc
-Comments: 
+account.py
+Comments: Data objects for Account information
 Author: Dennis Whitney
 Email: dennis@runasroot.com
-Copyright © 2019, iRunAsRoot 
+Copyright (c) 2019, iRunAsRoot
 """
 
 from . import JsonDict, JsonList

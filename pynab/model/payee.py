@@ -1,9 +1,9 @@
 """
-payee.py - desc
-Comments: 
+payee.py
+Comments: Data objects for Payee information
 Author: Dennis Whitney
 Email: dennis@runasroot.com
-Copyright © 2019, iRunAsRoot 
+Copyright (c) 2019, iRunAsRoot
 """
 
 from . import JsonDict, JsonList

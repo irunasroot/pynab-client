@@ -1,9 +1,9 @@
 """
-__init__.py - Create YnabClient for simple import
-Comments: 
+__init__.py
+Comments: Create YnabClient for simple import
 Author: Dennis Whitney
 Email: dennis@runasroot.com
-Copyright © 2019, iRunAsRoot 
+Copyright (c) 2019, iRunAsRoot
 """
 
 from .ynab import YnabClient
