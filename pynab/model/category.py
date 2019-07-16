@@ -1,9 +1,9 @@
 """
-budgetmonth.py - datamodels for Budget Months
-Comments: 
+category.py
+Comments: Data objects for Budget Category information
 Author: Dennis Whitney
 Email: dennis@runasroot.com
-Copyright © 2019, iRunAsRoot 
+Copyright (c) 2019, iRunAsRoot
 """
 
 from . import JsonDict, JsonList
@@ -68,8 +68,10 @@ class BudgetCategories(JsonList):
         :return: Returning a list of singular Ynab data type objects.
         """
 
-        for group in initlist:
+        if isinstance(initlist, dict):
+            initlist = [initlist]
 
+        for group in initlist:
             for cat in group["categories"]:
                 obj = cls()
                 obj.from_json_dict(cat)
