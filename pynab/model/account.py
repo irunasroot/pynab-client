@@ -39,7 +39,3 @@ class Accounts(JsonList):
 
     def __init__(self):
         super().__init__()
-
-    def __str__(self):
-        d = ", ".join([i.name for i in self._data])
-        return f"<{self.__class__.__name__} [{len(self._data)}]: {d}>"

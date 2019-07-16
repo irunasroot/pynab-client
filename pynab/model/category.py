@@ -9,13 +9,19 @@ Copyright (c) 2019, iRunAsRoot
 from . import JsonDict, JsonList
 
 
-class BudgetCategoriesGroup(JsonDict):
+class BudgetCategoryGroup(JsonDict):
     fields = {
         "id": str(),
         "name": str(),
         "hidden": bool(),
         "deleted": bool()
     }
+
+    def __init__(self):
+        super().__init__()
+
+
+class BudgetCategoryGroups(JsonList):
 
     def __init__(self):
         super().__init__()
@@ -53,11 +59,6 @@ class BudgetCategories(JsonList):
     def __init__(self):
         super().__init__()
 
-    def __str__(self):
-        d = ", ".join([i.name for i in self._data])
-
-        return f"<{self.__class__.__name__} [{len(self._data)}]: {d}>"
-
     def from_json_list(self, cls, initlist):
         """
          Class method for creating the proper incoming Ynab object. The incoming data needs to be a list type object.
@@ -77,7 +78,7 @@ class BudgetCategories(JsonList):
                 obj.from_json_dict(cat)
 
                 if "id" in group:
-                    setattr(obj, "group", BudgetCategoriesGroup().from_json_dict(group))
+                    setattr(obj, "group", BudgetCategoryGroup().from_json_dict(group))
 
                 self.append(obj)
         return self
