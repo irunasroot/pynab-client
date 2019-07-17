@@ -63,6 +63,7 @@ class YnabClient:
         Get budget account or accounts.
 
         :param account_id: Provide account_id to retrieve a single known account.
+            :default: None
         :param budget_id: The budget id of the budget you want to view data from.
             :default: last-used which is your last opened budget.
         :return: Returns Accounts object as a list of Account objects or a single Account object
