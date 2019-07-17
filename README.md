@@ -1,5 +1,29 @@
-# pynab
+# pynab-client
 Python API module for interfacing with You Need a Budget's (YNAB) v1 API
+
+Only runs on python >3.6 .....#sorrynotsorry
+
+## installation
+Easy way
+```bash
+pip install pynab-client
+```
+
+Less easy way
+```bash
+git clone https://github.com/irunasroot/pynab-client.git
+cd pynab-client
+python setup.py install
+```
+
+## Usage
+```python
+from pynabapi import YnabClient
+
+client = YnabClient("my-api-token")
+
+my_budgets = client.get_budget()
+```
 
 ## API
 
@@ -67,13 +91,4 @@ Get budget transaction or transactions.
 :param budget_id: The budget id of the budget you want to view data from.
     :default: last-used which is your last opened budget.
 :return: Returns Transactions object as a list of Transaction objects or a single Transaction object
-```
-
-## Usage
-```python
-from pynab import YnabClient
-
-client = YnabClient("my-api-token")
-
-my_budgets = client.get_budget()
 ```
